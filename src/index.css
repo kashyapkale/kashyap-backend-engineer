@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Engineer's Notebook Design System
+   Minimal, editorial, typographically strong
+   All colors in HSL format
+*/
+
+@layer base {
+  :root {
+    /* Light mode: Warm cream/off-white with slate text */
+    --background: 40 20% 98%;
+    --foreground: 220 20% 15%;
+
+    --card: 40 15% 96%;
+    --card-foreground: 220 20% 15%;
+
+    --popover: 40 20% 98%;
+    --popover-foreground: 220 20% 15%;
+
+    /* Copper/amber accent */
+    --primary: 25 80% 45%;
+    --primary-foreground: 40 20% 98%;
+
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 220 20% 25%;
+
+    --muted: 40 10% 94%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 25 70% 50%;
+    --accent-foreground: 40 20% 98%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 25 80% 45%;
+
+    --radius: 0.375rem;
+
+    /* Sidebar */
+    --sidebar-background: 40 15% 96%;
+    --sidebar-foreground: 220 20% 25%;
+    --sidebar-primary: 25 80% 45%;
+    --sidebar-primary-foreground: 40 20% 98%;
+    --sidebar-accent: 40 10% 92%;
+    --sidebar-accent-foreground: 220 20% 15%;
+    --sidebar-border: 220 15% 88%;
+    --sidebar-ring: 25 80% 45%;
+
+    /* Custom tokens */
+    --code-bg: 220 15% 95%;
+    --highlight: 45 90% 55%;
+    --success: 145 60% 40%;
+    --chart-1: 25 80% 45%;
+    --chart-2: 220 60% 50%;
+    --chart-3: 145 60% 40%;
+    --chart-4: 280 60% 50%;
+    --chart-5: 45 90% 50%;
+  }
+
+  .dark {
+    /* Dark mode: Deep charcoal with warm off-white text */
+    --background: 220 20% 8%;
+    --foreground: 40 15% 92%;
+
+    --card: 220 18% 12%;
+    --card-foreground: 40 15% 92%;
+
+    --popover: 220 20% 10%;
+    --popover-foreground: 40 15% 92%;
+
+    /* Warm copper accent */
+    --primary: 30 85% 55%;
+    --primary-foreground: 220 20% 8%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 40 15% 85%;
+
+    --muted: 220 15% 16%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 30 75% 50%;
+    --accent-foreground: 220 20% 8%;
+
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 30 85% 55%;
+
+    /* Sidebar dark */
+    --sidebar-background: 220 18% 10%;
+    --sidebar-foreground: 40 15% 85%;
+    --sidebar-primary: 30 85% 55%;
+    --sidebar-primary-foreground: 220 20% 8%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 40 15% 92%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 30 85% 55%;
+
+    /* Custom tokens dark */
+    --code-bg: 220 18% 14%;
+    --highlight: 40 90% 50%;
+    --success: 145 55% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  /* Subtle focus states */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  /* Engineer's notebook grid lines */
+  .notebook-grid {
+    background-image: 
+      linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 100% 1.5rem;
+  }
+
+  /* Subtle text selection */
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+
+  /* Code blocks */
+  .code-block {
+    @apply bg-[hsl(var(--code-bg))] rounded-md p-4 font-mono text-sm overflow-x-auto;
+  }
+
+  /* Timeline connector */
+  .timeline-connector {
+    @apply absolute left-0 top-0 bottom-0 w-px bg-border;
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-md hover:border-primary/30;
+  }
+
+  /* Link underline animation */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  
+  .link-underline::after {
+    @apply absolute bottom-0 left-0 h-px w-0 bg-primary transition-all duration-300 content-[''];
+  }
+  
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Skeleton animation */
+  .skeleton-pulse {
+    @apply animate-pulse bg-muted rounded;
+  }
+
+  /* GitHub contribution colors */
+  .contrib-0 { @apply bg-muted; }
+  .contrib-1 { @apply bg-primary/25; }
+  .contrib-2 { @apply bg-primary/50; }
+  .contrib-3 { @apply bg-primary/75; }
+  .contrib-4 { @apply bg-primary; }
+}
+
+@layer utilities {
+  /* Balanced text wrap */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Container prose width */
+  .prose-container {
+    @apply max-w-prose mx-auto;
+  }
+
+  /* Fade in animation */
+  .fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Stagger children animations */
+  .stagger-children > * {
+    animation: fadeIn 0.4s ease-out forwards;
+    opacity: 0;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.15s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.25s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(6) { animation-delay: 0.35s; }
+}
